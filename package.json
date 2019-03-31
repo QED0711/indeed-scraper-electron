@@ -1,0 +1,29 @@
+{
+  "name": "indeed-scraper-electron",
+  "version": "1.0.0",
+  "description": "Electron app for scraping and displaying indeed job searches",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QED0711/indeed-scraper-electron.git"
+  },
+  "keywords": [
+    "electron",
+    "indeed",
+    "web",
+    "scraper"
+  ],
+  "author": "Quinn Dizon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/QED0711/indeed-scraper-electron/issues"
+  },
+  "homepage": "https://github.com/QED0711/indeed-scraper-electron#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "request": "^2.88.0"
+  }
+}
