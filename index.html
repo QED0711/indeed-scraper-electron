@@ -9,10 +9,48 @@
 <body>
     <form id="search-filter-form">
 
-        <label>Indeed URL</label>
+        <label for="url">Indeed URL</label>
         <br>
-        <input type="text">
+        <input type="text" id="url" required>
+        <br>
+        
+        <div class="form-section">
+            <label for="limit">Limit</label>
+            <br>
+            <input type="number" id="limit" value="10" min="10" >
+            <br>
+            <label for="date">Date</label>
+            <br>
+            <input type="number" id="date" min="1" value="1">
+            <br>
+        </div>
 
+        <div class="form-section">
+            <label for="location">Exclude In Location</label>
+            <br>
+            <input type="text" id="location" >
+            <br>
+        </div>
+
+        <div class="form-section">
+            <input type="checkbox" id="sponsored">
+            <label for="sponsored">Exclude Sponsored</label>
+            <br>
+            
+            <input type="checkbox" id="responsive">
+            <label for="responsive">Only Responsive</label>
+            <br>
+        </div>
+
+<!-- 
+    url
+    limit
+    date
+    location excludes
+    exclude Sponsored
+    mark responsive
+
+ -->
 
         <br>
         <input type="submit" value="Run Search">
