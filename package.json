@@ -4,7 +4,8 @@
   "description": "Electron app for scraping and displaying indeed job searches",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,8 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "electron": "^4.1.3"
   }
 }
