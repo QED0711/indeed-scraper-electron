@@ -38,23 +38,26 @@ const returnParsedJobs = (jobs, $) => {
 }
 
 const queryJobs = (url, limit = 100, index = 0, parsedJobs = []) => {
-    request(url + `&start=${index}`, function(err, response, body){    
-        
-        console.log(index)
-        if(err){
-            console.log(err);
-            return
+    return new Promise(resolve => {
+        const sendRequest = (url, limit = 100, index = 0, parsedJobs = []) => {
+            request(url + `&start=${index}`, function(err, response, body){    
+
+                if(err){
+                    console.log(err);
+                    return
+                }
+                const $ = parseHTML(body);
+                const jobs = getJobCards($);
+                parsedJobs.push(...returnParsedJobs(jobs, $));
+                
+                if(hasNextPage($) && parsedJobs.length < limit){
+                    return sendRequest(url, limit, index + 10, parsedJobs);
+                } else {
+                    resolve(parsedJobs)
+                }                
+            })            
         }
-        const $ = parseHTML(body);
-        const jobs = getJobCards($);
-        parsedJobs.push(...returnParsedJobs(jobs, $));
-        // console.log("+++++++++++++++++++++++++++++ ", index, " +++++++++++++++++++++++++++++");
-        if(hasNextPage($) && parsedJobs.length < limit){
-            return queryJobs(url, limit, index + 10, parsedJobs);
-        } else {
-            console.log(parsedJobs)
-        }
-        
+        sendRequest(url, limit, index, parsedJobs);
     })
 }
 

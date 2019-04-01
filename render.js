@@ -2,11 +2,16 @@ const queryJobs = require('./js/queryJobs');
 const formInfo = require("./js/formInfo");
 
 
-document.getElementById("search-filter-form").onsubmit = (e) => {
+document.getElementById("search-filter-form").onsubmit = async (e) => {
     e.preventDefault();
     let userInfo = formInfo();
+    
     console.log(userInfo);
-    queryJobs(userInfo.url, userInfo.limit);
-    // queryJobs("https://www.indeed.com/jobs?q=&l=washington+dc&fromage=last", 25);
+    
+    let parsedJobs = []
+
+    await queryJobs(userInfo.url, userInfo.limit, 0, parsedJobs);
+    console.log(parsedJobs);
+    
 }
 
