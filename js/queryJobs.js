@@ -46,14 +46,18 @@ const queryJobs = (url, limit = 100, index = 0, parsedJobs = []) => {
                     console.log(err);
                     return
                 }
+
                 const $ = parseHTML(body);
                 const jobs = getJobCards($);
-                parsedJobs.push(...returnParsedJobs(jobs, $));
                 
-                if(hasNextPage($) && parsedJobs.length < limit){
-                    return sendRequest(url, limit, index + 10, parsedJobs);
+                if(parsedJobs.length < limit){
+                    parsedJobs.push(...returnParsedJobs(jobs, $));
                 } else {
-                    resolve(parsedJobs)
+                    resolve(parsedJobs);
+                }
+                
+                if(hasNextPage($)){
+                    return sendRequest(url, limit, index + 10, parsedJobs);
                 }                
             })            
         }

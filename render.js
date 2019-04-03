@@ -11,6 +11,7 @@ document.getElementById("search-filter-form").onsubmit = async (e) => {
     let parsedJobs = []
 
     await queryJobs(userInfo.url, userInfo.limit, 0, parsedJobs);
+    
     console.log(parsedJobs);
     
 }
