@@ -1,12 +1,11 @@
 
 class Filter {
-    constructor(job, options){
-        this.job = job;
+    constructor(options){
         this.options = options;
     }
 
-    checkLocation(){ // returns true if job location is a match
-        let splitLocation = this.options.locations.split("-");
+    checkLocation(job){ // returns true if job location is a match
+        let splitLocation = this.options.locations.split("/");
         let parsedLocation = "";
         splitLocation.forEach(loc => {
             if(parsedLocation.length){
@@ -15,28 +14,45 @@ class Filter {
             parsedLocation += `(${loc.trim()})`;
         });
         let remove = new RegExp(parsedLocation, "ig");
-        return remove.test(this.job.location);
+        return remove.test(job.location);
         
     }
 
-    checkSponsored(){
-        return this.job.sponsored
+    checkSponsored(job){
+        if(this.options.noSponsored){
+            return job.sponsored
+        } else {
+            return false;
+        }
     }
 
-    checkResponsive(){
-        return this.job.responsive
+    checkResponsive(job){
+        if(this.options.onlyResponsive){
+            return job.responsive
+        } else {
+            return false;
+        }
     }
 
-    runFilters(){
+    runFilters(job){
+        
+        if(
+            this.checkLocation(job)
+            ||
+            this.checkSponsored(job)
+            ||
+            !this.checkResponsive(job)
+        ) return false;
 
+        return true;
     }
 
 }
 
+// const job = {location: "Burbank, MA", sponsored: false, responsive: true};
 
+// let test = new Filter({locations: ", CA / DC", noSponsored: true, onlyResponsive: true});
 
-let test = new Filter({location: "Burbank, CA", sponsored: true, responsive: false}, {locations: ", CA - DC"});
+// console.log(test.runFilters(job));
 
-console.log(test.checkLocation());
-
-// module.exports = Filter; 
+module.exports = Filter; 
