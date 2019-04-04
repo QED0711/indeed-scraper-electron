@@ -5,7 +5,7 @@ const jobBox = (job) => {
             <a href="${job.href}" target="_blank">
                 <h3>${job.title}</h3>
             </a>
-            
+            <h4>${job.location}</h4>
             <p>${job.summary}</p>
             <p>${job.date}</p>
         </div>

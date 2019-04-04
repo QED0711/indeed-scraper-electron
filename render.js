@@ -7,7 +7,7 @@ const renderJobs = require("./js/renderJobs");
 document.getElementById("search-filter-form").onsubmit = async (e) => {
     e.preventDefault();
 
-    document.getElementById("jobs").innerHTML = "";
+    document.getElementById("jobs").innerHTML = "<h2>Loading...</h2>";
 
     let userInfo = formInfo();
     

@@ -1,5 +1,11 @@
+
 const request = require("request");
 const cheerio = require("cheerio");
+
+const cookie = require('./indeedCookie');
+
+const j = request.jar();
+
 
 // ================================================================
 
@@ -40,7 +46,8 @@ const returnParsedJobs = (jobs, $) => {
 const queryJobs = (url, limit = 100, index = 0, parsedJobs = []) => {
     return new Promise(resolve => {
         const sendRequest = (url, limit = 100, index = 0, parsedJobs = []) => {
-            request(url + `&start=${index}`, function(err, response, body){    
+            // j.setCookie(cookie, url)
+            request({url: url + `&start=${index}`/* , jar: j */}, function(err, response, body){    
 
                 if(err){
                     console.log(err);
