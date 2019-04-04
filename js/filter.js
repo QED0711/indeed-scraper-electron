@@ -5,6 +5,9 @@ class Filter {
     }
 
     checkLocation(job){ // returns true if job location is a match
+
+        if(this.options.locations === "") return false
+
         let splitLocation = this.options.locations.split("/");
         let parsedLocation = "";
         splitLocation.forEach(loc => {
@@ -30,7 +33,7 @@ class Filter {
         if(this.options.onlyResponsive){
             return job.responsive
         } else {
-            return false;
+            return true;
         }
     }
 

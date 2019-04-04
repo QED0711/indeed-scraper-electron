@@ -1,10 +1,14 @@
 const queryJobs = require('./js/queryJobs');
 const formInfo = require("./js/formInfo");
 const Filter = require("./js/filter");
+const renderJobs = require("./js/renderJobs");
 
 
 document.getElementById("search-filter-form").onsubmit = async (e) => {
     e.preventDefault();
+
+    document.getElementById("jobs").innerHTML = "";
+
     let userInfo = formInfo();
     
     console.log(userInfo);
@@ -13,12 +17,14 @@ document.getElementById("search-filter-form").onsubmit = async (e) => {
 
     await queryJobs(userInfo.url, userInfo.limit, 0, parsedJobs);
     
-    console.log(parsedJobs);
+    console.log("TOTAL JOBS:", parsedJobs.length);
     
     const filteredJobs = parsedJobs.filter(job => {
         return filter.runFilters(job);
     })
-    console.log(filteredJobs);
+    console.log("FILTERED: ", filteredJobs.length, filteredJobs);
+
+    renderJobs(filteredJobs);
     
 }
 
